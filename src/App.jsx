@@ -1,5 +1,29 @@
 import { useState } from "react";
+
 function App() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [product, setProduct] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = () => {
+    if (!name || !phone) {
+      alert("Please enter Name and Mobile Number");
+      return;
+    }
+
+    const whatsappMessage =
+      `*New Enquiry - AC GREENS*%0A%0A` +
+      `👤Name: ${name}%0A` +
+      `📞Phone: ${phone}%0A` +
+      `🪟Product: ${product}%0A` +
+      `📝Requirement: ${message}`;
+
+    window.open(
+      `https://wa.me/916393514591?text=${whatsappMessage}`,
+      "_blank"
+    );
+  }; 
   return (
     <div
       style={{
@@ -199,26 +223,44 @@ function App() {
             gap: "15px",
           }}
         >
-          <input type="text" placeholder="Your Name" style={inputStyle} />
-          <input type="tel" placeholder="Mobile Number" style={inputStyle} />
+          <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={inputStyle}
+          />
+          <input
+          type="tel"
+          placeholder="Mobile Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          style={inputStyle}
+          />
 
-          <select style={inputStyle}>
-            <option>Select Product</option>
-            <option>PVC Door</option>
-            <option>UPVC Window</option>
-            <option>Wall Panel</option>
-            <option>Partition</option>
+          <select
+          value={product}
+          onChange={(e) => setProduct(e.target.value)}
+          style={inputStyle}
+          >
+            <option value="">Select Product</option>
+            <option value="PVC Door">PVC Door</option>
+            <option value="UPVC Window">UPVC Window</option>
+            <option value="Wall Panel">Wall Panel</option>
+            <option value="Partition">Partition</option>
           </select>
 
           <textarea
             rows="5"
             placeholder="Your Requirement"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             style={inputStyle}
           />
 
           <button
           style={submitBtn}
-          onClick={() => alert("Enquiry Submitted Successfully")}
+          onClick={handleSubmit}
           >
             Submit Enquiry
           </button>
