@@ -1,3 +1,4 @@
+import { useState } from "react";
 function App() {
   return (
     <div
@@ -215,7 +216,10 @@ function App() {
             style={inputStyle}
           />
 
-          <button style={submitBtn}>
+          <button
+          style={submitBtn}
+          onClick={() => alert("Enquiry Submitted Successfully")}
+          >
             Submit Enquiry
           </button>
         </div>
